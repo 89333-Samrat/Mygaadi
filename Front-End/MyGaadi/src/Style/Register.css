@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.Reg-Page {
+  background-image: url("../assets/car-reg-back.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  display: flex;
+  justify-content: center;
+}
+.Reg-frame {
+  display: flex;
+  margin-top: 40px;
+
+  width: 50%;
+  height: 600px;
+  border-radius: 30px;
+}
+.Reg-car-img {
+  margin: 20px;
+  width: 50%;
+  background-image: url("../assets/car-reg-back.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.Reg-Filed {
+  width: 50%;
+  background-color: #ffffff;
+  input {
+    padding: 20px;
+    width: 200px;
+    margin: 10px;
+  }
+}
