@@ -3,16 +3,44 @@ import "../../Style/Register.css";
 function Register() {
   return (
     <>
-      <div className="Reg-Page">
-        <div className="Reg-frame">
-          <div className="Reg-car-img"></div>
-          <div className="Reg-Filed">
-            <input type="text" placeholder="Enter Your Name"></input>
-            <input type="email" placeholder="Enter Your Email"></input>
-            <input type="tel" placeholder="Enter Your PhoneNo "></input>
-            <input type="password" placeholder="Enter Your Password"></input>
-            <input type="password" placeholder="Conform Password"></input>
-          </div>
+      <div className="register-page">
+        <div className="window">
+          <span className="h1">Register</span>
+          <form>
+            <input
+              type="text"
+              className="mt-4 form-control"
+              placeholder="Enter Name"
+            ></input>
+            <input
+              type="email"
+              className="mt-4 form-control"
+              placeholder="Enter email"
+            ></input>
+            <input
+              type="tel"
+              className="mt-4 form-control"
+              placeholder="Enter PhoneNo"
+            ></input>
+            <input
+              type="password"
+              className="mt-4 form-control"
+              placeholder="Enter password"
+            ></input>
+            <input
+              type="password"
+              className="mt-4 form-control"
+              placeholder="Conform password"
+            ></input>
+            <button className="mt-4 btn btn-light mt-2">Register</button>
+
+            <small>
+              Do You have an account?{" "}
+              <a href="#" className="text-warning">
+                Login
+              </a>
+            </small>
+          </form>
         </div>
       </div>
     </>
