@@ -1,0 +1,98 @@
+.car-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.car-heading {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2b0759;
+  margin-bottom: 20px;
+}
+
+.body-type-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.tab {
+  padding: 10px 20px;
+  border-radius: 12px;
+  background-color: #f5ebff;
+  color: #7e22ce;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.tab.active {
+  background-color: #7e22ce;
+  color: #fff;
+}
+
+.car-grid {
+  width: 1400px;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 25px;
+  justify-items: center;
+  margin-left: 10%;
+}
+
+.car-card {
+  cursor: pointer;
+  width: 200px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: left;
+}
+
+.car-image {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+
+.car-info {
+  padding: 10px;
+}
+
+.car-info h3 {
+  font-size: 16px;
+  margin: 0;
+}
+
+.car-price {
+  font-weight: bold;
+  font-size: 15px;
+  color: #2b0759;
+}
+
+.onwards {
+  font-weight: normal;
+  color: #888;
+  font-size: 13px;
+}
+
+.view-all-btn {
+  margin-top: 30px;
+  width: 240px;
+  padding: 10px 25px;
+  background: transparent;
+  color: #7e22ce;
+  font-weight: bold;
+  border: 2px solid #7e22ce;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.view-all-btn:hover {
+  background-color: #7e22ce;
+  color: white;
+}

@@ -1,0 +1,68 @@
+.brands-container {
+  padding: 120px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.brands-heading {
+  font-size: 30px;
+  font-weight: bold;
+  color: #2b0759;
+  margin-bottom: 30px;
+}
+
+.brands-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 20px;
+  justify-items: center;
+  margin-bottom: 25px;
+}
+
+.brand-card {
+  background: white;
+  padding: 25px;
+  border-radius: 30px;
+  box-shadow: 0 3px 32px rgba(0, 0, 0, 0.05);
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid #e0e0e0;
+}
+
+.brand-logo {
+  max-width: 80px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.brand-name {
+  font-size: 18px;
+  color: #333;
+  margin: 0;
+}
+
+.brand-count {
+  font-size: 16px;
+  color: #7e22ce;
+  font-weight: 500;
+}
+
+.view-all-brands {
+  width: 240px;
+  padding: 10px 25px;
+  background: transparent;
+  color: #7e22ce;
+  font-weight: bold;
+  border: 2px solid #7e22ce;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.view-all-brands:hover {
+  background-color: #7e22ce;
+  color: white;
+}
