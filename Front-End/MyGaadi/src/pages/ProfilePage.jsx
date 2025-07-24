@@ -1,30 +1,86 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "../Style/ProfilePage.css";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/auth.context";
+import { useContext } from "react";
 
 const ProfilePage = () => {
+  //get the navigate() function reference
+  const navigate = useNavigate();
+
+  const { setUser } = useContext(AuthContext);
+  const [userData, setUserData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+  });
+
+  const onLogout = () => {
+    //remove all the caches values from session Storage
+    sessionStorage.removeItem("Name");
+    sessionStorage.removeItem("token");
+
+    //reset the user details in AuthContext
+    setUser(null);
+
+    //navigate to Login Screen
+
+    navigate("/");
+  };
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const token = sessionStorage.getItem("token");
+
+      if (!token) {
+        console.error("No token found");
+        return;
+      }
+
+      try {
+        const response = await axios.get("http://localhost:8080/api/profile", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const { name, phone, email } = response.data;
+        setUserData({ name, phone, email });
+      } catch (error) {
+        console.error("Error fetching profile:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
   return (
     <div className="profile-container">
       <div className="profile-card">
         <div className="profile-header">
-          <div className="profile-icon">S</div>
+          <div className="profile-icon">{userData.name.charAt(0)}</div>
           <div className="profile-details">
-            <h2>Samrat Mali</h2>
-            <p>9022605088</p>
-            <a href="#">Link your email or social account</a>
+            <h2>{userData.name}</h2>
+            <p>{userData.phone}</p>
+            <a href="#">
+              {userData.email || "Link your email or social account"}
+            </a>
           </div>
         </div>
 
         <div className="profile-options">
+          <button onClick={() => navigate("/home/AddCar")}>
+            Sell Your Vehicles
+          </button>
           <button>My Orders</button>
           <button>Shortlisted Vehicles</button>
-          <button>My Activity</button>
-          <button>My Vehicles</button>
-          <button>My Garage</button>
           <button>Manage Consents</button>
           <button>Profile Settings</button>
         </div>
 
-        <button className="logout-button">Logout</button>
+        <button onClick={onLogout} className="logout-button">
+          Logout
+        </button>
       </div>
     </div>
   );

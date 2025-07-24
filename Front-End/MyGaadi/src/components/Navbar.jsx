@@ -1,15 +1,41 @@
 import React from "react";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/auth.context";
+
 import { FaSearch, FaHeart, FaUserCircle } from "react-icons/fa";
 import "../Style/Navbar.css";
 import carLogo from "../assets/logo.png";
 
 function Navbar() {
+  //get the navigate() function reference
+  const navigate = useNavigate();
+
+  //get setUser from AuthContext
+  const { setUser } = useContext(AuthContext);
+
+  const onLogout = () => {
+    //remove all the caches values from session Storage
+    sessionStorage.removeItem("Name");
+    sessionStorage.removeItem("token");
+
+    //reset the user details in AuthContext
+    setUser(null);
+
+    //navigate to Login Screen
+
+    navigate("/");
+  };
   return (
     <>
       <nav className="navbar">
         {/* Logo Section */}
+
         <div className="navbar-left">
-          <img src={carLogo} alt="MyGaadi Logo" className="logo" />
+          <button id="logo" onClick={() => navigate("/home")}>
+            <img src={carLogo} alt="MyGaadi Logo" className="logo" />
+          </button>
+
           <div className="logo-text">
             <div className="tagline">BADHTE INDIA KA BHAROSA</div>
           </div>
@@ -30,15 +56,15 @@ function Navbar() {
 
         {/* Right Side */}
         <div className="navbar-right">
-          <FaHeart className="icon" />
-          <div className="user-info">
-            <div className="dropdown">
-              <button className="dropbtn">Account ▼</button>
-              <div className="dropdown-content">
-                <a href="/">Login</a>
-                <a href="/register">Register</a>
-              </div>
-            </div>
+          <button onClick={onLogout} className="logout-btn">
+            Logout
+          </button>
+          <div className="profile-icon-container">
+            <FaUserCircle
+              className="profile-icon"
+              onClick={() => navigate("/home/Profile")}
+              style={{ cursor: "pointer" }}
+            />
           </div>
         </div>
       </nav>
