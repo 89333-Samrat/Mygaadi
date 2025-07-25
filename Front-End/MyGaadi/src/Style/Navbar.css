@@ -127,3 +127,13 @@
   color: #ff5858;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
+
+/* Wishlist  */
+.wishlist-icon {
+  transition: color 0.2s, box-shadow 0.2s;
+  vertical-align: middle;
+}
+.wishlist-icon:hover {
+  color: #d32f2f;
+  box-shadow: 0 2px 8px rgba(255, 88, 88, 0.12);
+}

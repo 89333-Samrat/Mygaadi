@@ -1,2 +1,3 @@
-2025/07/24-19:00:04.364 1714 Creating DB D:\MyGaadi\Mygaadi\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\shared_proto_db since it was missing.
-2025/07/24-19:00:04.367 1714 Reusing MANIFEST D:\MyGaadi\Mygaadi\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\shared_proto_db/MANIFEST-000001
+2025/07/25-12:14:33.300 3ff8 Reusing MANIFEST D:\MyGaadi\Mygaadi\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\shared_proto_db/MANIFEST-000001
+2025/07/25-12:14:33.301 3ff8 Recovering log #3
+2025/07/25-12:14:33.302 3ff8 Reusing old log D:\MyGaadi\Mygaadi\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\shared_proto_db/000003.log 

@@ -8,6 +8,7 @@ import ProfilePage from "./pages/ProfilePage";
 import Filter from "./pages/Filter";
 import ShortlistedVehicles from "./pages/ShortlistedVehicles";
 import AddCarForm from "./components/car-page/AddCarForm";
+import WishList from "./components/home-page-com/Wishlist";
 function App() {
   return (
     <>
@@ -17,6 +18,7 @@ function App() {
         <Route path="home" element={<Home />}>
           <Route index element={<HomeLanding />} />
           <Route path="Profile" element={<ProfilePage />} />
+          <Route path="WishList" element={<WishList />} />
           <Route path="My-Short-List" element={<ShortlistedVehicles />} />
           <Route path="Filter" element={<Filter />} />
           <Route path="AddCar" element={<AddCarForm />} />

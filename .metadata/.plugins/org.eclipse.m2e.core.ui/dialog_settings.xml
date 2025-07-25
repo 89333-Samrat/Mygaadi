@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="D:\MyGaadi\Mygaadi\backend"/>
 			<item value="D:\MyGaadi\backend\CDAC-Project"/>
 			<item value="D:\MyGaadi\Mygaadi\Front-End"/>
 		</list>

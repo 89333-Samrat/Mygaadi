@@ -59,6 +59,16 @@ function Navbar() {
           <button onClick={onLogout} className="logout-btn">
             Logout
           </button>
+          <FaHeart
+            className="wishlist-icon"
+            onClick={() => navigate("/home/WishList")}
+            style={{
+              cursor: "pointer",
+              fontSize: "28px",
+              color: "#ff5858",
+              marginRight: "16px",
+            }}
+          />
           <div className="profile-icon-container">
             <FaUserCircle
               className="profile-icon"
