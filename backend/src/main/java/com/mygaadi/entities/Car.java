@@ -48,6 +48,11 @@ public class Car {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "car",fetch = FetchType.EAGER)
     private List<Image> list = new ArrayList<>();
     
+    
+    public List<Image> getImages() {
+        return list;
+    }
+
     public void addImage(Image image)
     {
     	this.list.add(image);

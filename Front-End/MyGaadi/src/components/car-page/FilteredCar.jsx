@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
-import "../../Style/carFilter.css";
-
+import "../../Style/Filter.css";
 const FilterCar = () => {
   const location = useLocation();
   const [startIndex, setStartIndex] = useState(1);

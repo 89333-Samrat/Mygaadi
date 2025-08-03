@@ -72,7 +72,9 @@ const ProfilePage = () => {
           <button onClick={() => navigate("/home/AddCar")}>
             Sell Your Vehicles
           </button>
-          <button>My Orders</button>
+          <button onClick={() => navigate("/home/Myvehicles")}>
+            My Vehicles
+          </button>
           <button>Shortlisted Vehicles</button>
           <button>Manage Consents</button>
           <button>Profile Settings</button>

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import "../../Style/CarDetails.css"; // Make sure this file is updated accordingly
-
+import "../../Style/CarDetails.css";
 const CarDetailPage = () => {
   const { carId } = useParams();
   const navigate = useNavigate();

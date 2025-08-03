@@ -16,6 +16,7 @@ public interface CarService {
 	    List<CarResponseDTO> filterCars(CarFilterDTO filter);
 	    
 	    CarResponseDTO getCarById(Long id);
+	    List<CarResponseDTO> getCarsBySellerId(Long sellerId); // ✅ Add this method
 
 
 

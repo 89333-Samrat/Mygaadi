@@ -1,5 +1,7 @@
 package com.mygaadi.entities;
 
+import java.util.Base64;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,6 +22,11 @@ public class Image {
 	@Lob
 	@Column(columnDefinition = "MEDIUMBLOB")
 	private byte[] image;
+	
+	
+	public String getImageBase64() {
+	    return Base64.getEncoder().encodeToString(this.image);
+	}
 	@ManyToOne
 	@JoinColumn(name = "car_id")
 	private Car car;

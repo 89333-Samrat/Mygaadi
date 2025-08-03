@@ -57,7 +57,7 @@ const PopularBrands = () => {
             className="brand-card"
             key={index}
             onClick={() => {
-              navigate(`/Home/filtercar`, { state: { brand } });
+              navigate(`/Home/Filtercar`, { state: { brand } });
             }}
           >
             {brand.name}
