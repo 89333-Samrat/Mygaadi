@@ -31,8 +31,9 @@ public class CarController {
 
     @Autowired
     private ObjectMapper objectMapper;
-
+    
     @PostMapping("/add")
+   
     public ResponseEntity<?> addCarImage(
             @RequestHeader("Authorization") String authHeader,
             @RequestParam("images") MultipartFile[] images,
@@ -64,8 +65,9 @@ public class CarController {
         return ResponseEntity.ok(carService.filterCars(filter));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<CarResponseDTO> getCarById(@PathVariable Long id) {
         return ResponseEntity.ok(carService.getCarById(id));
     }
+
 }

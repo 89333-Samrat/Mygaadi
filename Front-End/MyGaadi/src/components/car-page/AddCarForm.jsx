@@ -4,6 +4,15 @@ const AddCarForm = () => {
   const [formValues, setFormValues] = useState({
     brand: "",
     model: "",
+    registrationYear: "",
+    ownership: "",
+    kmDriven: "",
+    location: "",
+    registrationNo: "",
+    color: "",
+    insuranceValid: false,
+    fuelType: "",
+    transmission: "",
     price: "",
   });
 
@@ -11,8 +20,9 @@ const AddCarForm = () => {
   const [previewUrls, setPreviewUrls] = useState([]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
+    const { name, value, type, checked } = e.target;
+    const fieldValue = type === "checkbox" ? checked : value;
+    setFormValues({ ...formValues, [name]: fieldValue });
   };
 
   const handleImageChange = (e) => {
@@ -25,12 +35,6 @@ const AddCarForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Validate required fields
-    if (!formValues.brand || !formValues.model || !formValues.price) {
-      alert("Please fill in all required fields.");
-      return;
-    }
 
     const formData = new FormData();
     formData.append("car", JSON.stringify(formValues));
@@ -50,15 +54,25 @@ const AddCarForm = () => {
       });
 
       if (response.ok) {
-        const data = await response.json();
-        console.log("Car added:", data);
         alert("Car added successfully!");
-        setFormValues({ brand: "", model: "", price: "" });
+        setFormValues({
+          brand: "",
+          model: "",
+          registrationYear: "",
+          ownership: "",
+          kmDriven: "",
+          location: "",
+          registrationNo: "",
+          color: "",
+          insuranceValid: false,
+          fuelType: "",
+          transmission: "",
+          price: "",
+        });
         setSelectedImages([]);
         setPreviewUrls([]);
       } else {
         const errorData = await response.json();
-        console.error("Error uploading car:", errorData);
         alert("Failed to add car: " + errorData.message);
       }
     } catch (error) {
@@ -68,7 +82,7 @@ const AddCarForm = () => {
   };
 
   return (
-    <div className="add-car-form">
+    <div className="add-car-form max-w-xl mx-auto p-4">
       <h2 className="text-xl font-bold mb-4">Add New Car</h2>
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <input
@@ -79,7 +93,6 @@ const AddCarForm = () => {
           onChange={handleChange}
           className="block w-full border p-2 mb-2"
         />
-
         <input
           type="text"
           name="model"
@@ -88,7 +101,82 @@ const AddCarForm = () => {
           onChange={handleChange}
           className="block w-full border p-2 mb-2"
         />
+        <input
+          type="number"
+          name="registrationYear"
+          placeholder="Registration Year"
+          value={formValues.registrationYear}
+          onChange={handleChange}
+          className="block w-full border p-2 mb-2"
+        />
+        <input
+          type="text"
+          name="ownership"
+          placeholder="Ownership"
+          value={formValues.ownership}
+          onChange={handleChange}
+          className="block w-full border p-2 mb-2"
+        />
+        <input
+          type="number"
+          name="kmDriven"
+          placeholder="KM Driven"
+          value={formValues.kmDriven}
+          onChange={handleChange}
+          className="block w-full border p-2 mb-2"
+        />
+        <input
+          type="text"
+          name="location"
+          placeholder="Location"
+          value={formValues.location}
+          onChange={handleChange}
+          className="block w-full border p-2 mb-2"
+        />
+        <input
+          type="text"
+          name="registrationNo"
+          placeholder="Registration No."
+          value={formValues.registrationNo}
+          onChange={handleChange}
+          className="block w-full border p-2 mb-2"
+        />
+        <input
+          type="text"
+          name="color"
+          placeholder="Color"
+          value={formValues.color}
+          onChange={handleChange}
+          className="block w-full border p-2 mb-2"
+        />
 
+        <label className="block mb-2">
+          <input
+            type="checkbox"
+            name="insuranceValid"
+            checked={formValues.insuranceValid}
+            onChange={handleChange}
+            className="mr-2"
+          />
+          Insurance Valid
+        </label>
+
+        <input
+          type="text"
+          name="fuelType"
+          placeholder="Fuel Type"
+          value={formValues.fuelType}
+          onChange={handleChange}
+          className="block w-full border p-2 mb-2"
+        />
+        <input
+          type="text"
+          name="transmission"
+          placeholder="Transmission"
+          value={formValues.transmission}
+          onChange={handleChange}
+          className="block w-full border p-2 mb-2"
+        />
         <input
           type="number"
           name="price"
