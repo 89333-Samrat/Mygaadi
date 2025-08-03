@@ -36,6 +36,15 @@ public class UserController {
                 .body(new ResponseDTO<>("success", userDto)); 
     }
     
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDTO> getUser(@PathVariable Long id) {
+        return ResponseEntity.ok(userService.getUserById(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody SignupReqDTO dto) {
+        return ResponseEntity.ok(userService.updateUser(id, dto));
+    }
     
     
     

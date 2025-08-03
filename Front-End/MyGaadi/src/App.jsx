@@ -9,6 +9,9 @@ import Filter from "./pages/Filter";
 import ShortlistedVehicles from "./pages/ShortlistedVehicles";
 import AddCarForm from "./components/car-page/AddCarForm";
 import WishList from "./components/home-page-com/Wishlist";
+import AllCarsPage from "./components/car-page/AllCarsPage";
+import CarDetailsPage from "./components/car-page/CarDetailsPage";
+import FilterCar from "./components/car-page/FilteredCar";
 function App() {
   return (
     <>
@@ -22,6 +25,9 @@ function App() {
           <Route path="My-Short-List" element={<ShortlistedVehicles />} />
           <Route path="Filter" element={<Filter />} />
           <Route path="AddCar" element={<AddCarForm />} />
+          <Route path="AllCar" element={<AllCarsPage />} />
+          <Route path="cars/:carId" element={<CarDetailsPage />} />
+          <Route path="Filtercar" element={<FilterCar />} />
         </Route>
       </Routes>
       <ToastContainer />

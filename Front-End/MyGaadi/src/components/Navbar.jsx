@@ -61,7 +61,7 @@ function Navbar() {
           </button>
           <FaHeart
             className="wishlist-icon"
-            onClick={() => navigate("/home/WishList")}
+            onClick={() => navigate("/home/MyWishList")}
             style={{
               cursor: "pointer",
               fontSize: "28px",

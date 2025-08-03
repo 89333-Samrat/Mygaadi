@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import "../Style/ShortlistedVehicles.css";
 
-const vehicles = [
+const initialVehicles = [
   {
     name: "Tata Safari",
     price: "₹15.50 - 27.25 Lakh*",
@@ -29,6 +29,12 @@ const vehicles = [
 ];
 
 const ShortlistedVehicles = () => {
+  const [vehicles, setVehicles] = useState(initialVehicles);
+
+  const handleRemove = (index) => {
+    setVehicles((prev) => prev.filter((_, i) => i !== index));
+  };
+
   return (
     <div className="shortlist-container">
       <aside className="sidebar">
@@ -54,22 +60,33 @@ const ShortlistedVehicles = () => {
 
       <main className="main-content">
         <h2>Shortlisted</h2>
-        <p>13 items are shortlisted, you can explore them</p>
-        <div className="filter-buttons">
-          <button className="active">All</button>
-          <button>New Car</button>
-          <button>Used Car</button>
-        </div>
+        <p>
+          {vehicles.length} item
+          {vehicles.length !== 1 ? "s" : ""} are shortlisted, you can explore
+          them
+        </p>
         <div className="vehicle-list">
-          {vehicles.map((v, index) => (
-            <div className="vehicle-card" key={index}>
-              <div className="vehicle-tag">{v.tag}</div>
-              <h3>{v.name}</h3>
-              <p>{v.type}</p>
-              <p className="price">{v.price}</p>
-              <button className="check-now">Check Now ➤</button>
-            </div>
-          ))}
+          {vehicles.length === 0 ? (
+            <div className="empty-message">No vehicles shortlisted.</div>
+          ) : (
+            vehicles.map((v, index) => (
+              <div className="vehicle-card improved" key={index}>
+                <div className="vehicle-tag">{v.tag}</div>
+                <h3>{v.name}</h3>
+                <p>{v.type}</p>
+                <p className="price">{v.price}</p>
+                <div className="card-actions">
+                  <button className="check-now">Check Now ➤</button>
+                  <button
+                    className="remove-btn"
+                    onClick={() => handleRemove(index)}
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+            ))
+          )}
         </div>
       </main>
     </div>

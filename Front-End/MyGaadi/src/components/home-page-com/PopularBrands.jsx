@@ -11,7 +11,9 @@ import Volkswagen from "../../assets/CarBrandLogo/Volkswagen.png";
 import Skoda from "../../assets/CarBrandLogo/Skoda.jpg";
 import Ford from "../../assets/CarBrandLogo/Ford.png";
 import MgMotors from "../../assets/CarBrandLogo/Mg.png";
+import { useNavigate } from "react-router-dom";
 const PopularBrands = () => {
+  const navigate = useNavigate();
   const brands = [
     {
       name: "Maruti Suzuki",
@@ -51,7 +53,14 @@ const PopularBrands = () => {
       <h2 className="brands-heading">Explore Popular Brands</h2>
       <div className="brands-grid">
         {brands.map((brand, index) => (
-          <div className="brand-card" key={index}>
+          <div
+            className="brand-card"
+            key={index}
+            onClick={() => {
+              navigate(`/Home/filtercar`, { state: { brand } });
+            }}
+          >
+            {brand.name}
             <img src={brand.logo} alt={brand.name} className="brand-logo" />
             <div className="brand-info">
               <p className="brand-name">{brand.name}</p>

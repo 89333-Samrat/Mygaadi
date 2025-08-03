@@ -1,4 +1,5 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import "../../Style/homepage/cityStyle.css";
 import A from "../../assets/city/Ahm.png";
 import B from "../../assets/city/CityB.png";
@@ -10,6 +11,8 @@ import G from "../../assets/city/CityG.png";
 import H from "../../assets/city/CityH.png";
 import I from "../../assets/city/CityI.png";
 const City = () => {
+  const [city, setCity] = useState("");
+  const navigate = useNavigate();
   const cities = [
     { name: "Ahmedabad", icon: A },
     { name: "Bangalore", icon: B },
@@ -33,7 +36,14 @@ const City = () => {
           <h2 className="section-title">Get trusted used cars nearby</h2>
           <div className="city-grid">
             {cities.map((city, index) => (
-              <div key={index} className="city-card">
+              <div
+                key={index}
+                className="city-card"
+                onClick={() => {
+                  navigate(`/Home/filtercar`, { state: { city } });
+                }}
+              >
+                {city.name}
                 <img
                   src={city.icon}
                   alt={`${city.name} icon`}
@@ -74,7 +84,11 @@ const City = () => {
             <input
               type="text"
               placeholder="Enter your city"
-              className="city-input"
+              className="city-name"
+              onChange={(e) => {
+                const selectedCity = { name: e.target.value }; // or from dropdown options
+                setCity(selectedCity);
+              }}
             />
             <span className="input-icon location-icon">
               {/* Location icon - using inline SVG */}
@@ -112,7 +126,14 @@ const City = () => {
           </div>
           <div className="search-button-wrapper">
             {/* Simple button for demonstration */}
-            <button className="search-button">Search Cars</button>
+            <button
+              onClick={() => {
+                navigate(`/Home/filtercar`, { state: { city } });
+              }}
+              className="search-button"
+            >
+              Search Cars
+            </button>
           </div>
           {/* Subtle city skyline illustration */}
           <div className="city-skyline-illustration">
