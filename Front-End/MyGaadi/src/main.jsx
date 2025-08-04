@@ -3,10 +3,13 @@ import "./index.css";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import AuthProvider from "./contexts/AuthProvider";
+import { ShortlistProvider } from "./contexts/ShortlistContext.jsx";
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
+    <ShortlistProvider>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </ShortlistProvider>
   </BrowserRouter>
 );
