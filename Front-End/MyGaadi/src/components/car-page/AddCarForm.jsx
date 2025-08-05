@@ -1,7 +1,38 @@
 import React, { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "../../Style/AddCarForm.css";
 
 const AddCarForm = () => {
+  const brands = [
+    "Maruti Suzuki",
+    "Hyundai",
+    "Renault",
+    "Honda",
+    "Tata",
+    "Kia",
+    "Mahindra",
+    "Volkswagen",
+    "Skoda",
+    "Ford",
+    "Mg Motors",
+  ];
+
+  const locations = [
+    "Ahmedabad",
+    "Bangalore",
+    "Chennai",
+    "Delhi NCR",
+    "Gurgaon",
+    "Hyderabad",
+    "Jaipur",
+    "Kolkata",
+    "Mumbai",
+    "New Delhi",
+    "Noida",
+    "Pune",
+  ];
+
   const [formValues, setFormValues] = useState({
     brand: "",
     model: "",
@@ -34,8 +65,48 @@ const AddCarForm = () => {
     setPreviewUrls(files.map((file) => URL.createObjectURL(file)));
   };
 
+  const validateForm = () => {
+    const {
+      brand,
+      model,
+      registrationYear,
+      ownership,
+      kmDriven,
+      location,
+      registrationNo,
+      color,
+      fuelType,
+      transmission,
+      price,
+    } = formValues;
+
+    if (
+      !brand ||
+      !model ||
+      !registrationYear ||
+      !ownership ||
+      !kmDriven ||
+      !location ||
+      !registrationNo ||
+      !color ||
+      !fuelType ||
+      !transmission ||
+      !price ||
+      selectedImages.length === 0
+    ) {
+      toast.error(
+        "Please fill all required fields and upload at least one image."
+      );
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!validateForm()) return;
+
     const formData = new FormData();
     formData.append("car", JSON.stringify(formValues));
     selectedImages.forEach((file) => formData.append("images", file));
@@ -52,7 +123,7 @@ const AddCarForm = () => {
       });
 
       if (response.ok) {
-        alert("Car added successfully!");
+        toast.success("Car added successfully!");
         setFormValues({
           brand: "",
           model: "",
@@ -71,16 +142,17 @@ const AddCarForm = () => {
         setPreviewUrls([]);
       } else {
         const errorData = await response.json();
-        alert("Failed to add car: " + errorData.message);
+        toast.error("Failed to add car: " + errorData.message);
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("Something went wrong while uploading the car.");
+      toast.error("Something went wrong while uploading the car.");
     }
   };
 
   return (
     <div className="add-car-form">
+      <ToastContainer />
       <h2>Add New Car</h2>
       <form
         onSubmit={handleSubmit}
@@ -112,13 +184,15 @@ const AddCarForm = () => {
 
         {/* Right Panel: Form Fields */}
         <div className="right-panel">
-          <input
-            type="text"
-            name="brand"
-            placeholder="Brand"
-            value={formValues.brand}
-            onChange={handleChange}
-          />
+          <select name="brand" value={formValues.brand} onChange={handleChange}>
+            <option value="">Select Brand</option>
+            {brands.map((brand, i) => (
+              <option key={i} value={brand}>
+                {brand}
+              </option>
+            ))}
+          </select>
+
           <input
             type="text"
             name="model"
@@ -126,20 +200,29 @@ const AddCarForm = () => {
             value={formValues.model}
             onChange={handleChange}
           />
+
           <input
             type="number"
             name="registrationYear"
-            placeholder="Registration Year"
+            placeholder="Registration Year (e.g. 2020)"
             value={formValues.registrationYear}
             onChange={handleChange}
+            min="1990"
+            max={new Date().getFullYear()}
           />
-          <input
-            type="text"
+
+          <select
             name="ownership"
-            placeholder="Ownership"
             value={formValues.ownership}
             onChange={handleChange}
-          />
+          >
+            <option value="">Ownership</option>
+            <option value="FIRST">1st Hand</option>
+            <option value="SECOND">2nd Hand</option>
+            <option value="THIRD">3rd Hand</option>
+            <option value="FOURTH_OR_MORE">4th or More</option>
+          </select>
+
           <input
             type="number"
             name="kmDriven"
@@ -147,13 +230,20 @@ const AddCarForm = () => {
             value={formValues.kmDriven}
             onChange={handleChange}
           />
-          <input
-            type="text"
+
+          <select
             name="location"
-            placeholder="Location"
             value={formValues.location}
             onChange={handleChange}
-          />
+          >
+            <option value="">Select Location</option>
+            {locations.map((loc, i) => (
+              <option key={i} value={loc}>
+                {loc}
+              </option>
+            ))}
+          </select>
+
           <input
             type="text"
             name="registrationNo"
@@ -161,6 +251,7 @@ const AddCarForm = () => {
             value={formValues.registrationNo}
             onChange={handleChange}
           />
+
           <input
             type="text"
             name="color"
@@ -169,7 +260,7 @@ const AddCarForm = () => {
             onChange={handleChange}
           />
 
-          <label>
+          <label className="checkbox-label">
             <input
               type="checkbox"
               name="insuranceValid"
@@ -179,20 +270,27 @@ const AddCarForm = () => {
             Insurance Valid
           </label>
 
-          <input
-            type="text"
+          <select
             name="fuelType"
-            placeholder="Fuel Type"
             value={formValues.fuelType}
             onChange={handleChange}
-          />
-          <input
-            type="text"
+          >
+            <option value="">Fuel Type</option>
+            <option value="Petrol">Petrol</option>
+            <option value="Diesel">Diesel</option>
+            <option value="Electric">Electric</option>
+          </select>
+
+          <select
             name="transmission"
-            placeholder="Transmission"
             value={formValues.transmission}
             onChange={handleChange}
-          />
+          >
+            <option value="">Transmission</option>
+            <option value="Manual">Manual</option>
+            <option value="Automatic">Automatic</option>
+          </select>
+
           <input
             type="number"
             name="price"
