@@ -11,6 +11,7 @@ import AllCarsPage from "./components/car-page/AllCarsPage";
 import CarDetailsPage from "./components/car-page/CarDetailsPage";
 import FilterCar from "./components/car-page/FilteredCar";
 import Myvehicles from "./pages/profile-pages/MyVehicles";
+import ProfileUpdate from "./pages/profile-pages/ProfileUpdatePage";
 function App() {
   return (
     <>
@@ -26,6 +27,7 @@ function App() {
           <Route path="cars/:carId" element={<CarDetailsPage />} />
           <Route path="Filtercar" element={<FilterCar />} />
           <Route path="MyVehicles" element={<Myvehicles />} />
+          <Route path="ProfileUpdate" element={<ProfileUpdate />} />
         </Route>
       </Routes>
       <ToastContainer />

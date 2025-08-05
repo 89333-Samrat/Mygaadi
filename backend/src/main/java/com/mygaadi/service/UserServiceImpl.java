@@ -40,6 +40,9 @@ public class UserServiceImpl implements UserService {
     
     
     
+    
+    
+    
     //Logic For JWT Token
     
     
@@ -132,5 +135,14 @@ public class UserServiceImpl implements UserService {
         User saved = userDao.save(user);
         return modelMapper.map(saved, UserDTO.class);
     }
+    
+    
+    
+    //for profile update 
+    @Override
+    public User updateUser(User user) {
+        return userDao.save(user);
+    }
+
 
 }

@@ -77,7 +77,9 @@ const ProfilePage = () => {
           </button>
           <button>Shortlisted Vehicles</button>
           <button>Manage Consents</button>
-          <button>Profile Settings</button>
+          <button onClick={() => navigate("/home/ProfileUpdate")}>
+            Profile Settings
+          </button>
         </div>
 
         <button onClick={onLogout} className="logout-button">

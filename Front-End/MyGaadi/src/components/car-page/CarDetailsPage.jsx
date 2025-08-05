@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../../Style/CarDetails.css";
+
 const CarDetailPage = () => {
   const { carId } = useParams();
   const navigate = useNavigate();
@@ -20,19 +21,16 @@ const CarDetailPage = () => {
 
   const toggleWishlist = () => {
     setWishlist((prev) => !prev);
-
     axios
       .post(`http://localhost:8080/api/favorites/3/${carId}`)
       .then((res) => {
         if (res.status === 200) {
           alert("Car was added to wishlist");
         } else {
-          console.warn("Unexpected response status:", res.status);
+          console.warn("Unexpected response:", res.status);
         }
       })
-      .catch((err) => {
-        console.error("Error adding to wishlist:", err);
-      });
+      .catch((err) => console.error("Error adding to wishlist:", err));
   };
 
   const nextImage = () => {
@@ -50,28 +48,22 @@ const CarDetailPage = () => {
   return (
     <div className="container mt-5 car-detail-container">
       <div className="row g-4">
-        {/* Image section */}
+        {/* Image Section */}
         <div className="col-md-5">
-          <div className="image-wrapper position-relative">
+          <div className="image-wrapper">
             <img
               src={`data:image/jpeg;base64,${car.images[currentImageIndex]?.imagebase64}`}
               alt="Car"
-              className="car-image w-100 rounded"
+              className="car-image"
             />
 
             {car.images.length > 1 && (
               <>
-                <button
-                  className="image-nav-button left btn btn-light rounded-circle"
-                  onClick={prevImage}
-                >
-                  <i className="bi bi-chevron-left fs-4" />
+                <button className="image-nav-button left" onClick={prevImage}>
+                  <i className="bi bi-chevron-left fs-5" />
                 </button>
-                <button
-                  className="image-nav-button right btn btn-light rounded-circle"
-                  onClick={nextImage}
-                >
-                  <i className="bi bi-chevron-right fs-4" />
+                <button className="image-nav-button right" onClick={nextImage}>
+                  <i className="bi bi-chevron-right fs-5" />
                 </button>
               </>
             )}
@@ -87,9 +79,10 @@ const CarDetailPage = () => {
               />
             </button>
           </div>
-          <p>{car.description}</p>
 
-          <div className="d-flex gap-3 mt-3 flex-wrap">
+          <div className="car-description-box mb-3">{car.description}</div>
+
+          <div className="car-detail-buttons d-flex gap-3 flex-wrap mt-3">
             <button className="btn btn-primary">
               <i className="bi bi-calendar-check me-2"></i>Book Car
             </button>
@@ -102,9 +95,9 @@ const CarDetailPage = () => {
           </div>
         </div>
 
-        {/* Car details table */}
+        {/* Car Details Table */}
         <div className="col-md-7">
-          <h4>
+          <h4 className="car-info-heading">
             {car.brand} {car.model} - {car.variant}
           </h4>
           <table className="table table-bordered table-sm mt-3 fs-5">
