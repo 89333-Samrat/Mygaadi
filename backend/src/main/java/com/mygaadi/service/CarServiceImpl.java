@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.mygaadi.dao.CarDao;
 import com.mygaadi.dao.ImageDao;
 import com.mygaadi.dao.UserDao;
+import com.mygaadi.dto.ApiResponse;
 import com.mygaadi.dto.CarFilterDTO;
 import com.mygaadi.dto.CarImageDTO;
 import com.mygaadi.dto.CarRequestDTO;
@@ -16,7 +17,6 @@ import com.mygaadi.dto.CarResponseDTO;
 import com.mygaadi.entities.Car;
 import com.mygaadi.entities.Image;
 import com.mygaadi.entities.User;
-import com.mygaadi.mapper.CarMapper;
 import com.mygaadi.specification.CarSpecification;
 import com.mygaadi.custom_exceptions.ResourceNotFoundException;
 
@@ -73,9 +73,7 @@ public class CarServiceImpl implements CarService {
             throw new RuntimeException("Error processing image file", e);
         }
     }
-
-
-    // ✅ Fetch all cars
+    
     @Override
     public List<CarResponseDTO> getAllCars() {
         List<Car> cars = carDao.findAll();
@@ -100,9 +98,8 @@ public class CarServiceImpl implements CarService {
             return carDto;
         }).collect(Collectors.toList());
     }
-
-
-    // ✅ Filter/Search cars with sorting by latest first
+    
+    
     @Override
     public List<CarResponseDTO> filterCars(CarFilterDTO filter) {
         List<Car> cars = carDao.findAll(
@@ -135,8 +132,6 @@ public class CarServiceImpl implements CarService {
              return responseList;
     }
     
-
-    
     @Override
     public CarResponseDTO getCarById(Long id) {
         Car car = carDao.findById(id)
@@ -159,10 +154,6 @@ public class CarServiceImpl implements CarService {
         return newcar;
     }
     
-    
-    
-    
-    //To fetch cars added by seler
     @Override
     public List<CarResponseDTO> getCarsBySellerId(Long sellerId) {
         List<Car> cars = carDao.findBySellerId(sellerId);
@@ -187,10 +178,28 @@ public class CarServiceImpl implements CarService {
 
         return responseList;
     }
+    
+
+	@Override
+	public ApiResponse deleteCarById(Long id) {
+		Car car = carDao.findById(id)
+		.orElseThrow(() -> new ResourceNotFoundException("Car not found with ID " + id));
+		 List<Image> list = imageDao.findAllByCar_CarId(car.getCarId());
+		car.deleteImage(list);
+		carDao.deleteById(id);
+		return new ApiResponse("car was deleted");
+	}
+	
 
 
-
-
-
+	@Override
+	public ApiResponse updateCar(Long id, CarRequestDTO car) {
+		
+		Car oldcar = carDao.findById(id).orElseThrow(()-> new RuntimeException("invalid id"));
+		modelMapper.map(car, oldcar);
+		carDao.save(oldcar);
+		
+		return new ApiResponse("Success");
+	}
 
 }

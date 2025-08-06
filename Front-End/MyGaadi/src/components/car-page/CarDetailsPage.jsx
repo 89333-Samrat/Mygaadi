@@ -83,7 +83,10 @@ const CarDetailPage = () => {
           <div className="car-description-box mb-3">{car.description}</div>
 
           <div className="car-detail-buttons d-flex gap-3 flex-wrap mt-3">
-            <button className="btn btn-primary">
+            <button
+              onClick={() => navigate(`/home/book/${car.carId}`)}
+              className="btn btn-primary"
+            >
               <i className="bi bi-calendar-check me-2"></i>Book Car
             </button>
             <button className="btn btn-success">

@@ -54,24 +54,23 @@ public class CarController {
         // Save car with extracted sellerId
         return ResponseEntity.ok(carService.addCar(dto, images, sellerId));
     }
+    
 
     @GetMapping("/all")
     public ResponseEntity<List<CarResponseDTO>> getAllCars() {
         return ResponseEntity.ok(carService.getAllCars());
     }
-
+    
     @PostMapping("/filter")
     public ResponseEntity<List<CarResponseDTO>> filterCars(@RequestBody CarFilterDTO filter) {
         return ResponseEntity.ok(carService.filterCars(filter));
     }
-
+    
     @GetMapping("/{id}")
     public ResponseEntity<CarResponseDTO> getCarById(@PathVariable Long id) {
         return ResponseEntity.ok(carService.getCarById(id));
     }
     
-    
-    //To get seller cars which he added
     @GetMapping("/my")
     public ResponseEntity<List<CarResponseDTO>> getMyCars(@RequestHeader("Authorization") String authHeader) {
         String token = authHeader.substring(7);
@@ -79,7 +78,21 @@ public class CarController {
         Long sellerId = userService.getUserByEmail(email).getId();
         return ResponseEntity.ok(carService.getCarsBySellerId(sellerId));
     }
-
-
+    
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteMyCar(@PathVariable Long id){
+ 
+        
+		return ResponseEntity.ok(carService.deleteCarById(id));
+    	
+    }
+    
+    
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateCar(@PathVariable Long id,@RequestBody CarRequestDTO car)
+    {
+		return ResponseEntity.ok(carService.updateCar(id,car));
+    	
+    }
 
 }

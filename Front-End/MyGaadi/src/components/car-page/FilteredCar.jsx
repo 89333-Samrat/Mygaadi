@@ -83,17 +83,23 @@ const FilterCar = () => {
             key={car.carId}
             className={`car-card ${isCenter ? "center-card" : "side-card"}`}
             onClick={() => handleClick(car.carId)}
+            style={{ position: "relative" }} // Ensure relative for absolute heart
           >
-            <div
+            {/* Heart button at top-right */}
+            <button
               className="wishlist-btn"
               onClick={(e) => handleWishlist(car, e)}
+              aria-label={
+                isWishlisted ? "Remove from wishlist" : "Add to wishlist"
+              }
+              tabIndex={0}
             >
               {isWishlisted ? (
                 <FaHeart className="heart filled" />
               ) : (
                 <FaRegHeart className="heart" />
               )}
-            </div>
+            </button>
 
             {car.images?.length > 0 ? (
               <img
@@ -109,13 +115,18 @@ const FilterCar = () => {
               <h3>
                 {car.brand} {car.model}
               </h3>
-              <p>₹{car.price?.toLocaleString()} *</p>
+              <p>
+                <strong>₹{car.price?.toLocaleString()}</strong>
+              </p>
               <p>
                 {car.registrationYear} • {car.fuelType} • {car.transmission}
               </p>
               <p>
                 {car.kmDriven} km • {car.ownership} Owner
               </p>
+              <p>Location: {car.location}</p>
+              <p>Registration No: {car.registrationNo}</p>
+              <p>Color: {car.color}</p>
 
               <div className="tags">
                 {car.fuelType === "Electric" && (
@@ -130,14 +141,12 @@ const FilterCar = () => {
                 className="offer-button"
                 onClick={(e) => {
                   e.stopPropagation();
-                  alert("View August Offers");
+                  navigate(`/Home/cars/${car.carId}`);
                 }}
               >
-                View August Offers
+                Check Now
               </button>
             </div>
-
-            <div className="variant-bar">Variant: {car.variant}</div>
           </div>
         );
       })}

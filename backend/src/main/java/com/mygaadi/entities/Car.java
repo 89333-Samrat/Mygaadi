@@ -48,6 +48,9 @@ public class Car {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "car",fetch = FetchType.EAGER)
     private List<Image> list = new ArrayList<>();
     
+    @OneToMany(mappedBy = "car", fetch = FetchType.EAGER)
+    private List<Appointment> appointments;
+
     
     public List<Image> getImages() {
         return list;
@@ -57,5 +60,14 @@ public class Car {
     {
     	this.list.add(image);
     	image.setCar(this);
+    }
+    
+    
+    public void deleteImage(List<Image> list)
+    {
+    	 if (this.getAppointments() != null) {
+    	        this.getAppointments().forEach(appointment -> appointment.setCar(null));
+    	    }
+    	list.forEach(image->image.setCar(null));
     }
 }

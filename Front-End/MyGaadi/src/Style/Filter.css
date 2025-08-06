@@ -258,18 +258,34 @@
 
 .wishlist-btn {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  background: transparent;
+  top: 18px;
+  right: 18px;
+  background: #fff;
   border: none;
-  font-size: 22px;
-  cursor: pointer;
-  z-index: 2;
-  color: #888;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  transition: box-shadow 0.2s, background 0.2s;
 }
 
-.heart-icon.filled {
-  color: red;
+.wishlist-btn:hover {
+  background: #e6f0ff;
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.18);
+}
+
+.heart {
+  font-size: 26px;
+  color: #bbb;
+  transition: color 0.2s;
+}
+
+.heart.filled {
+  color: #e53935;
 }
 
 .car-grid {
@@ -406,18 +422,32 @@
 
 .wishlist-btn {
   position: absolute;
-  top: 12px;
-  right: 12px;
-  background: transparent;
+  top: 18px;
+  right: 18px;
+  background: #fff;
   border: none;
-  z-index: 2;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  transition: box-shadow 0.2s, background 0.2s;
+}
+
+.wishlist-btn:hover {
+  background: #e6f0ff;
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.18);
 }
 
 .heart {
-  font-size: 24px;
-  color: #999;
+  font-size: 26px;
+  color: #bbb;
+  transition: color 0.2s;
 }
 
 .heart.filled {
-  color: red;
+  color: #e53935;
 }

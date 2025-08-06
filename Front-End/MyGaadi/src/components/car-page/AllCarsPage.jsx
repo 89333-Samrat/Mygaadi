@@ -62,13 +62,18 @@ const AllCarsPage = () => {
               <h3>
                 {car.brand} {car.model}
               </h3>
-              <p>₹{car.price?.toLocaleString()} *</p>
+              <p>
+                <strong>₹{car.price?.toLocaleString()}</strong>
+              </p>
               <p>
                 {car.registrationYear} • {car.fuelType} • {car.transmission}
               </p>
               <p>
                 {car.kmDriven} km • {car.ownership} Owner
               </p>
+              <p>Location: {car.location}</p>
+              <p>Registration No: {car.registrationNo}</p>
+              <p>Color: {car.color}</p>
 
               <div className="tags">
                 {car.fuelType === "Electric" && (
@@ -83,14 +88,12 @@ const AllCarsPage = () => {
                 className="offer-button"
                 onClick={(e) => {
                   e.stopPropagation();
-                  alert("View August Offers");
+                  navigate(`/Home/cars/${car.carId}`);
                 }}
               >
-                View August Offers
+                Check Now
               </button>
             </div>
-
-            <div className="variant-bar">Variant: {car.variant}</div>
           </div>
         );
       })}
