@@ -63,7 +63,11 @@ const MyVehicles = () => {
                     <button
                       className="btn btn-primary"
                       onClick={() => {
-                        navigate(`/home/updatecar/${car.carId}`);
+                        if (car.carId) {
+                          navigate(`/home/updatecar/${car.carId}`);
+                        } else {
+                          toast.error("Car ID is missing");
+                        }
                       }}
                     >
                       Update

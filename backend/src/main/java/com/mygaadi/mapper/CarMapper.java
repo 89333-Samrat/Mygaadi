@@ -12,8 +12,11 @@ import java.util.stream.Collectors;
 public class CarMapper {
 
     public static CarResponseDTO toDto(Car car) {
+        if (car == null) return null;
+
         CarResponseDTO dto = new CarResponseDTO();
 
+        // Set basic car details
         dto.setCarId(car.getCarId());
         dto.setBrand(car.getBrand());
         dto.setModel(car.getModel());
@@ -31,19 +34,22 @@ public class CarMapper {
         dto.setDescription(car.getDescription());
         dto.setCreatedAt(car.getCreatedAt());
 
-        // 👇 FIX: Correctly handle image byte[] → base64
-        if (car.getList() != null) {
+        // Map images to DTO
+        if (car.getList() != null && !car.getList().isEmpty()) {
             List<CarImageDTO> imageDTOs = car.getList().stream()
-            		.map(image -> {
-            		    CarImageDTO dtoImg = new CarImageDTO();
-            		    try {
-            		        dtoImg.setImagebase64(Base64.getEncoder().encodeToString(image.getImage()));
-            		    } catch (Exception e) {
-            		        dtoImg.setImagebase64(null);
-            		    }
-            		    return dtoImg;
-            		})
-
+                .map(image -> {
+                    CarImageDTO dtoImg = new CarImageDTO();
+                    if (image.getImage() != null) {
+                        try {
+                            String base64 = Base64.getEncoder().encodeToString(image.getImage());
+                            dtoImg.setImagebase64(base64);
+                    
+                        } catch (Exception e) {
+                            dtoImg.setImagebase64(null);
+                        }
+                    }
+                    return dtoImg;
+                })
                 .collect(Collectors.toList());
             dto.setImages(imageDTOs);
         }
