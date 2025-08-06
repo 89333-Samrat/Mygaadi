@@ -72,10 +72,12 @@
 }
 
 .city-name {
+  padding: 20px;
   font-size: 1.1rem;
   font-weight: 600;
   color: #2563eb;
   margin-bottom: 0;
+  padding-left: 39px;
 }
 
 /* Right Section */

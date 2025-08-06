@@ -3,7 +3,8 @@ import "../Style/ShortlistedVehicles.css";
 import { useShortlist } from "../contexts/ShortlistContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import { AuthContext } from "../contexts/auth.context";
+import { useContext } from "react";
 const ShortlistedVehicles = () => {
   const { shortlisted, removeFromShortlist } = useShortlist();
   const [userData, setUserData] = useState({
@@ -11,9 +12,20 @@ const ShortlistedVehicles = () => {
     phone: "",
     email: "",
   });
-
+  const { setUser } = useContext(AuthContext);
   const navigate = useNavigate();
+  const onLogout = () => {
+    //remove all the caches values from session Storage
+    sessionStorage.removeItem("Name");
+    sessionStorage.removeItem("token");
 
+    //reset the user details in AuthContext
+    setUser(null);
+
+    //navigate to Login Screen
+
+    navigate("/");
+  };
   useEffect(() => {
     const fetchUserData = async () => {
       const token = sessionStorage.getItem("token");
@@ -59,15 +71,24 @@ const ShortlistedVehicles = () => {
           </div>
         </div>
         <nav className="nav-menu">
-          <button>My Orders</button>
-          <button className="active">Shortlisted Vehicles</button>
-          <button>My Activity</button>
-          <button>My Vehicles</button>
-          <button>My Garage</button>
-          <button>Manage Consents</button>
-          <button>Profile Settings</button>
+          <button onClick={() => navigate("/home/AddCar")}>
+            Sell Your Vehicles
+          </button>
+          <button onClick={() => navigate("/home/Myvehicles")}>
+            My Vehicles
+          </button>
+
+          <button onClick={() => navigate("/home/myorder")}>My Orders</button>
+          <button onClick={() => navigate("/home/manage")}>
+            Manage Consents
+          </button>
+          <button onClick={() => navigate("/home/ProfileUpdate")}>
+            Profile Settings
+          </button>
         </nav>
-        <button className="logout-btn">Logout</button>
+        <button onClick={onLogout} className="logout-btn">
+          Logout
+        </button>
       </aside>
 
       <main className="main-content">

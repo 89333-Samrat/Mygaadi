@@ -75,7 +75,9 @@ const ProfilePage = () => {
           <button onClick={() => navigate("/home/Myvehicles")}>
             My Vehicles
           </button>
-          <button>Shortlisted Vehicles</button>
+          <button onClick={() => navigate("/home/MyWishList")}>
+            Shortlisted Vehicles
+          </button>
           <button onClick={() => navigate("/home/myorder")}>My Orders</button>
           <button onClick={() => navigate("/home/manage")}>
             Manage Consents

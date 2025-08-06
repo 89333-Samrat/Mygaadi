@@ -46,7 +46,7 @@ const UpdateCarForm = () => {
     ownership: "",
     kmDriven: "",
     location: "",
-    registrationNumber: "", // ✅ Correct field name
+    registrationNumber: "",
     color: "",
     insuranceValid: false,
     fuelType: "",
@@ -220,7 +220,7 @@ const UpdateCarForm = () => {
 
           <input
             type="text"
-            name="registrationNumber" // ✅ Corrected
+            name="registrationNumber"
             placeholder="Registration No."
             value={formValues.registrationNumber}
             onChange={handleChange}
