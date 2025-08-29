@@ -56,7 +56,7 @@
   border: 1.5px solid #bdbdbd;
   font-size: 1.15rem;
   font-weight: 500;
-  color: #111; /* Dark text */
+  color: #111 !important; /* Dark text */
   background: #fff; /* Pure white background */
   transition: border-color 0.2s;
 }

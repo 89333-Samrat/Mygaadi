@@ -7,7 +7,7 @@ const CarDetailPage = () => {
   const { carId } = useParams();
   const navigate = useNavigate();
   const [car, setCar] = useState(null);
-  const [wishlist, setWishlist] = useState(false);
+  // const [wishlist, setWishlist] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
@@ -19,19 +19,19 @@ const CarDetailPage = () => {
       .catch((err) => console.error(err));
   }, [carId]);
 
-  const toggleWishlist = () => {
-    setWishlist((prev) => !prev);
-    axios
-      .post(`http://localhost:8080/api/favorites/3/${carId}`)
-      .then((res) => {
-        if (res.status === 200) {
-          alert("Car was added to wishlist");
-        } else {
-          console.warn("Unexpected response:", res.status);
-        }
-      })
-      .catch((err) => console.error("Error adding to wishlist:", err));
-  };
+  // const toggleWishlist = () => {
+  //   setWishlist((prev) => !prev);
+  //   axios
+  //     .post(`http://localhost:8080/api/favorites/3/${carId}`)
+  //     .then((res) => {
+  //       if (res.status === 200) {
+  //         alert("Car was added to wishlist");
+  //       } else {
+  //         console.warn("Unexpected response:", res.status);
+  //       }
+  //     })
+  //     .catch((err) => console.error("Error adding to wishlist:", err));
+  // };
 
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % car.images.length);
@@ -69,7 +69,7 @@ const CarDetailPage = () => {
             )}
           </div>
 
-          <div className="d-flex justify-content-between align-items-start mt-4">
+          {/* <div className="d-flex justify-content-between align-items-start mt-4">
             <h5>Description</h5>
             <button className="btn btn-link p-0" onClick={toggleWishlist}>
               <i
@@ -78,7 +78,7 @@ const CarDetailPage = () => {
                 } fs-3`}
               />
             </button>
-          </div>
+          </div> */}
 
           <div className="car-description-box mb-3">{car.description}</div>
 
@@ -89,9 +89,9 @@ const CarDetailPage = () => {
             >
               <i className="bi bi-calendar-check me-2"></i>Book Car
             </button>
-            <button className="btn btn-success">
+            {/* <button className="btn btn-success">
               <i className="bi bi-telephone me-2"></i>Contact Dealer
-            </button>
+            </button> */}
             <button className="btn btn-secondary" onClick={() => navigate(-1)}>
               <i className="bi bi-arrow-left me-2"></i>Go Back
             </button>
